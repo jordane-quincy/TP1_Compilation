@@ -9,6 +9,7 @@
 %%
 int main ()
 {
+
 	int i;
 	yylex();
 	for (i = 0; i < MAX; i++) {
