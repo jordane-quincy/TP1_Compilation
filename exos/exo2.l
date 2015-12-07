@@ -29,14 +29,19 @@ void inserer(char* mot, int cat, int longueur) {
 void afficherMot(char* mot) {
 	MAILLON *tmp;
 	tmp = L;
-	while (tmp->suiv != NULL && strcmp(tmp->mot, mot) != 0) {
-		tmp = tmp->suiv;
-	}
-	if (strcmp(tmp->mot, mot) == 0) {
-		printf("%s est un %s\n", mot, tabCat[tmp->categorie]);
+	if(tmp == NULL) {
+		printf("%s est un mot inconnu\n", mot);
 	}
 	else {
-		printf("%s est un mot inconnu\n", mot);
+		while (tmp->suiv != NULL && strcmp(tmp->mot, mot) != 0) {
+			tmp = tmp->suiv;
+		}
+		if (strcmp(tmp->mot, mot) == 0) {
+			printf("%s est un %s\n", mot, tabCat[tmp->categorie]);
+		}
+		else {
+			printf("%s est un mot inconnu\n", mot);
+		}
 	}
 };
 %}
