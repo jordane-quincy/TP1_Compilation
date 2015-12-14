@@ -10,6 +10,7 @@
 	Liste L = NULL;
 	int enApprentissage = 0;
 	int currentCat;
+	int error = 0;
 
 void inserer(char* mot, int cat, int longueur) {
 	MAILLON *p;
@@ -20,12 +21,10 @@ void inserer(char* mot, int cat, int longueur) {
 	p->suiv = L;
 	L = p;
 };
-
 int afficherMot(char* mot) {
 	MAILLON *tmp;
 	tmp = L;
 	if(tmp == NULL) {
-		printf("%s est un mot inconnu\n", mot);
 	}
 	else {
 		while (tmp->suiv != NULL && strcmp(tmp->mot, mot) != 0) {
@@ -52,29 +51,32 @@ int afficherMot(char* mot) {
 		inserer(yytext, currentCat, yyleng);
 	}
 	else {
-		switch (afficherMot(yytext))
-		{
-			case 1 :
-				return (NOM);
-
-			case 2:
-				return (PRONOM);
-
-			case 3:
-				return (ADJECTIF);
-
-			case 4 :
-				return (ADVERBE);
-
-			case 5 :
-				return (VERBE);
-
-			default :
-				break;			
+		if (error != 1) {
+			switch (afficherMot(yytext))
+			{
+				case 1 :
+					return (NOM);
+	
+				case 2:
+					return (PRONOM);
+	
+				case 3:
+					return (ADJECTIF);
+	
+				case 4 :
+					return (ADVERBE);
+	
+				case 5 :
+					return (VERBE);
+	
+				default :
+					error = 1;
+					printf("Un des mots de la phrase n'existe pas\n");
+					break;			
+			}
 		}
 	}
 }
-\n {enApprentissage = 0;}
+\n {enApprentissage = 0; error = 0;}
 . ;
-
 %%
