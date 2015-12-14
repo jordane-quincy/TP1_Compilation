@@ -1,3 +1,9 @@
 flex exo2.l
 gcc lex.yy -lfl
 .\a.out
+
+bison + lex
+bison -d exo2bis.y
+flex exo2bis.l
+gcc exo2bis.tab.c -ly -ll
+./a.out
